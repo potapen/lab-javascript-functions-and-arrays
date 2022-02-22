@@ -1,42 +1,124 @@
 // Iteration #1: Find the maximum
-function maxOfTwoNumbers() {}
+console.log('----- Iteration #1: Find the maximum')
+function maxOfTwoNumbers(a,b) {
+  return a>b?a:b
+}
 
 
-
+console.log('----- Iteration #2: Find longest word')
 // Iteration #2: Find longest word
-const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
-
-function findLongestWord() {}
+const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot']
 
 
+function findLongestWord(inputArray) {
+  if (inputArray.length === 0){return null}
+  else if(inputArray.length === 1){return inputArray[0]}
+  else{
+    const computeLength = word => word.length
+    const lengthArray = inputArray.map(computeLength)
 
+    const longestLength = Math.max(...lengthArray)
+    console.log(`longestLength is ${longestLength} for array: ${lengthArray}`)
+    const firstLongestWordIndex = lengthArray.indexOf(longestLength)
+    const firstLongestWord = inputArray[firstLongestWordIndex]
+    console.log(`The first longest word is at position ${firstLongestWordIndex} long and is ${firstLongestWord}`)
+    return firstLongestWord
+  } 
+}
+console.log(findLongestWord(words))
 // Iteration #3: Calculate the sum
+console.log('----- Iteration #3: Calculate the sum')
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
-function sumNumbers() {}
+function sumNumbers(inputArray) {
+  let sum = 0
+  for (let i=0 ; i<inputArray.length ; i++){
+    sum += inputArray[i]
+  }
+  console.log(`the sum of ${inputArray} is ${sum}`)
+  return sum
+}
+sumNumbers(numbers)
 
 
 
 // Iteration #3.1 Bonus:
-function sum() {}
+console.log('----- Iteration #3.1 Bonus')
+function sum(inputArray) {
+  console.log(`the inputArray is :${inputArray}.`)
+  if (inputArray.length === 0){return 0} //if empty inputArray we return null
 
+  const computeType = elt => {
+    switch(typeof elt){
+      case 'number':
+        return elt
+      case 'string':
+        return elt.length
+      case 'boolean':
+        return Number(elt)
+      default:
+        throw new Error("Unsupported data type sir or ma'am")
+    }
+  }
+  const sizeArray = inputArray.map(computeType)
+  console.log(`it has the following sizes: ${sizeArray}`)
+  const sumInt = sumNumbers(sizeArray)
+  console.log('the total sum is :', sumInt)
+  return sumInt
+}
+const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10]
+sum(mixedArr)
 
 
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
-const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
+console.log('----- Iteration #4: Calculate the average')
+console.log('--- Level 1: Array of numbers')
 
-function averageNumbers() {}
+//const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
+const numbersAvg = [9];
 
+function averageNumbers(inputArray) {
+  if (inputArray.length === 0){return null}
+  const sum = sumNumbers(inputArray)
+  const card = inputArray.length
+  const average = sum/card
+  console.log(`sum is ${sum}, card is ${card}, average is ${average}`)
+  return average
+}
+averageNumbers(numbersAvg)
 
 // Level 2: Array of strings
+console.log('--- Level 2: Array of strings')
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
 
-function averageWordLength() { }
+function averageWordLength(inputArray) {
+  if (inputArray.length === 0){return null}
+  const totalWordLength = sum(inputArray)
+  const numberOfWord = inputArray.length
+  const avg = totalWordLength/numberOfWord
+  console.log(`the totalWordLength is ${totalWordLength}, the numberOfWord is ${numberOfWord}, the average is ${avg}`)
+  return avg
+}
+averageWordLength(wordsArr)
+
 
 // Bonus - Iteration #4.1
-function avg() {}
+console.log('----- Bonus - Iteration #4.1')
+//const mixedArr2 = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10]
+const mixedArr2 = [6, 12, 'miami', 1, 'barca', '200', 'lisboa', 8, true]
+console.log('the initial mixedArr is: ', mixedArr2)
+function avg(inputArray) {
+  if (inputArray.length === 0){return null}
+  const sumOfArray = sum(inputArray)
+  const card = inputArray.length
+  const avgStr = (sumOfArray/card).toFixed(2) //this is a string
+  const avg = Number(avgStr) //we cast it to a number
 
+  console.log(`the sumOfArray is ${sumOfArray}, the card is ${card}, the avg is ${avg}`)
+  return avg
+}
+avg(mixedArr2)
 // Iteration #5: Unique arrays
 const wordsUnique = [
   'crab',
@@ -52,18 +134,39 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray() {}
-
+function uniquifyArray(inputArray) {
+  if(inputArray.length === 0){return null}
+  const uniqueArray = []
+  for (let word of inputArray){
+    if(uniqueArray.indexOf(word) === -1){uniqueArray.push(word)}
+  }
+  console.log('the input array is: ', inputArray)
+  console.log('the unique array is: ', uniqueArray)
+  return uniqueArray
+}
+uniquifyArray(wordsUnique)
 
 
 // Iteration #6: Find elements
+console.log('----- Iteration #6: Find elements')
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist() {}
+function doesWordExist(inputArray, wordToSearch) {
+  if(inputArray.length===0){return null}
+  for(word of inputArray){
+    if(word === wordToSearch){
+      console.log(`the wordToSearch ${wordToSearch} was found in inputArray: ${inputArray}`)
+      return true
+    }
+  }
+  console.log(`the wordToSearch ${wordToSearch} was NOT found in inputArray: ${inputArray}`)
+  return false
+}
 
-
+doesWordExist(wordsFind, 'toto')
 
 // Iteration #7: Count repetition
+console.log('----- Iteration #7: Count repetition')
 const wordsCount = [
   'machine',
   'matter',
@@ -78,11 +181,19 @@ const wordsCount = [
   'matter'
 ];
 
-function howManyTimes() {}
-
+function howManyTimes(inputArray, wordToCount) {
+  let count = 0
+  for(let word of inputArray){
+    if (word === wordToCount){count++}
+  }
+  console.log(`The wordToCount ${wordToCount} was found ${count} times`);
+  return count
+}
+howManyTimes(wordsCount,'toto')
 
 
 // Iteration #8: Bonus
+console.log('----- Iteration #8: Bonus');
 const matrix = [
   [8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
   [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0],
@@ -106,8 +217,30 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
+function greatestProduct(inputMatrix) {
+  const nbLine = inputMatrix.length
+  const nbCol = inputMatrix[1].length
+  console.log(`there are ${nbLine} lines and ${nbCol} colonnes`)
+  const productMatrix = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+  for(let j=0 ; j<nbCol-3 ; j++){
+    for(let i=0 ; i<nbLine-3 ; i++){
+      productMatrix[i][j] = inputMatrix[i][j] * inputMatrix[i+1][j] * inputMatrix[i+2][j] * inputMatrix[i+3][j]
+    }
+  }
+  console.log('+++++ productMatrix')
+  console.log(productMatrix)
+  const maxArray = [] //compute the max of each line
+  for(let i=0 ; i<productMatrix.length ; i++){
+    maxArray[i] = Math.max(...productMatrix[i])
+  }
+  console.log('+++++ maxArray')
+  console.log(maxArray)
+  const max = Math.max(...maxArray)//max of all products
+  console.log('the max product is :', max);
+  return max
 
+}
+greatestProduct(matrix)
 
 
 
